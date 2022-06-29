@@ -4,3 +4,14 @@ workspace.xml
 *.log
 dist
 .parcel-cache
+projects/commit-up/db
+
+coordinator.state
+coordinator.state_old
+p2pstore
+privatedb
+snapshots
+hornet
+data
+secret.data.ts
+db-files*

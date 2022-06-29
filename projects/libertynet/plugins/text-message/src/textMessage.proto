@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+message TextMessage {
+  string owner = 1;
+  string text = 2;
+}
+

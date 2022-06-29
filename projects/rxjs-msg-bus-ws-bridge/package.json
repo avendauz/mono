@@ -1,0 +1,19 @@
+{
+  "name": "@scottburch/rxjs-msg-bus-ws-bridge",
+  "version": "1.0.2",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@scottburch/rxjs-msg-bus": "*",
+    "@types/chai": "^4.3.1",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "^18.6.4",
+    "@types/ws": "^8.5.3",
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "rxjs": "^7.5.6",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4",
+    "ws": "^8.8.1"
+  }
+}

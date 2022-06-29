@@ -1,9 +1,12 @@
 {
   "name": "@scottburch/rxjs-msg-bus",
-  "version": "1.0.0",
+  "version": "1.0.7",
   "main": "lib/rxjs-msg-bus.js",
   "license": "MIT",
   "dependencies": {
+    "@scottburch/rxjs-utils": "^1.0.2",
+    "delay": "^5.0.0",
+    "protobufjs": "^7.0.0",
     "rxjs": "^7.5.5"
   },
   "devDependencies": {
@@ -16,6 +19,7 @@
     "typescript": "^4.7.4"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "mocha -r ts-node/register src/**/*.spec.ts"
   }
 }

@@ -1,0 +1,259 @@
+{
+  "restAPI": {
+    "bindAddress": "0.0.0.0:14265",
+    "jwtAuth": {
+      "salt": "HORNET"
+    },
+    "publicRoutes": [
+      "/health",
+      "/mqtt",
+      "/api/v1/*",
+      "/api/plugins/*"
+    ],
+    "protectedRoutes": [
+    ],
+    "powEnabled": true,
+    "powWorkerCount": 1,
+    "limits": {
+      "bodyLength": "1M",
+      "maxResults": 1000
+    }
+  },
+  "dashboard": {
+    "bindAddress": "localhost:8081",
+    "dev": false,
+    "auth": {
+      "sessionTimeout": "72h",
+      "username": "admin",
+      "passwordHash": "899ec5c00b0e1ec6287ebdefc8179467a3e7b562373247b6d4850d652efcdebf",
+      "passwordSalt": "b41fb660e69aa72d921a22f3322628d0a9bbe7a80a8cdeed692bc00c828aa7dc"
+    }
+  },
+  "db": {
+    "engine": "pebble",
+    "path": "privatedb",
+    "autoRevalidation": false
+  },
+  "snapshots": {
+    "depth": 50,
+    "interval": 200,
+    "fullPath": "snapshots/libertynet/full_snapshot.bin",
+    "deltaPath": "snapshots/libertynet/delta_snapshot.bin",
+    "deltaSizeThresholdPercentage": 50.0,
+    "downloadURLs": []
+  },
+  "pruning": {
+    "milestones": {
+      "enabled": false,
+      "maxMilestonesToKeep": 60480
+    },
+    "size": {
+      "enabled": true,
+      "targetSize": "30GB",
+      "thresholdPercentage": 10.0,
+      "cooldownTime": "5m"
+    },
+    "pruneReceipts": false
+  },
+  "protocol": {
+    "networkID": "libertynet",
+    "bech32HRP": "liberty",
+    "minPoWScore": 100.0,
+    "milestonePublicKeyCount": 2,
+    "publicKeyRanges": [
+      {
+        "key": "c8139ec9bdb034df599bad8d2654e939520e1a733514aa5047dec71bce92a8c6",
+        "start": 0,
+        "end": 0
+      },
+      {
+        "key": "b27a8ab08100500bcc2a45cc6f4cbaacfd784010a8ad15b1987d6f6c1af4915f",
+        "start": 0,
+        "end": 0
+      }
+    ]
+  },
+  "pow": {
+    "refreshTipsInterval": "5s"
+  },
+  "requests": {
+    "discardOlderThan": "15s",
+    "pendingReEnqueueInterval": "5s"
+  },
+  "coordinator": {
+    "stateFilePath": "data/coordinator.state",
+    "interval": "10s",
+    "powWorkerCount": 0,
+    "checkpoints": {
+      "maxTrackedMessages": 10000
+    },
+    "tipsel": {
+      "minHeaviestBranchUnreferencedMessagesThreshold": 20,
+      "maxHeaviestBranchTipsPerCheckpoint": 10,
+      "randomTipsPerCheckpoint": 3,
+      "heaviestBranchSelectionTimeout": "100ms"
+    },
+    "signing": {
+      "provider": "local",
+      "remoteAddress": "localhost:12345",
+      "retryAmount": 10,
+      "retryTimeout": "2s"
+    },
+    "quorum": {
+      "enabled": false,
+      "groups": {
+        "hornet": [
+          {
+            "alias": "test01",
+            "baseURL": "http://localhost:14265",
+            "userName": "",
+            "password": ""
+          }
+        ]
+      },
+      "timeout": "2s"
+    }
+  },
+  "migrator": {
+    "stateFilePath": "migrator.state",
+    "receiptMaxEntries": 110,
+    "queryCooldownPeriod": "5s"
+  },
+  "receipts": {
+    "backup": {
+      "enabled": false,
+      "path": "receipts"
+    },
+    "validator": {
+      "validate": false,
+      "ignoreSoftErrors": false,
+      "api": {
+        "address": "http://localhost:14266",
+        "timeout": "5s"
+      },
+      "coordinator": {
+        "address": "UDYXTZBE9GZGPM9SSQV9LTZNDLJIZMPUVVXYXFYVBLIEUHLSEWFTKZZLXYRHHWVQV9MNNX9KZC9D9UZWZ",
+        "merkleTreeDepth": 24
+      }
+    }
+  },
+  "tangle": {
+    "milestoneTimeout": "30s"
+  },
+  "tipsel": {
+    "maxDeltaMsgYoungestConeRootIndexToCMI": 2,
+    "maxDeltaMsgOldestConeRootIndexToCMI": 7,
+    "belowMaxDepth": 15,
+    "nonLazy": {
+      "retentionRulesTipsLimit": 100,
+      "maxReferencedTipAge": "3s",
+      "maxChildren": 30,
+      "spammerTipsThreshold": 0
+    },
+    "semiLazy": {
+      "retentionRulesTipsLimit": 20,
+      "maxReferencedTipAge": "3s",
+      "maxChildren": 2,
+      "spammerTipsThreshold": 30
+    }
+  },
+  "node": {
+    "alias": "HORNET libertynet node",
+    "profile": "auto",
+    "disablePlugins": [],
+    "enablePlugins": [
+      "Spammer",
+      "Debug",
+      "Prometheus",
+      "Autopeering"
+    ]
+  },
+  "p2p": {
+    "bindMultiAddresses": [
+      "/ip4/127.0.0.1/tcp/15600"
+    ],
+    "connectionManager": {
+      "highWatermark": 10,
+      "lowWatermark": 5
+    },
+    "gossip": {
+      "unknownPeersLimit": 4,
+      "streamReadTimeout": "1m0s",
+      "streamWriteTimeout": "10s"
+    },
+    "db": {
+      "path": "p2pstore"
+    },
+    "reconnectInterval": "30s",
+    "autopeering": {
+      "bindAddress": "0.0.0.0:14626",
+      "entryNodes": [],
+      "entryNodesPreferIPv6": false,
+      "runAsEntryNode": false
+    }
+  },
+  "logger": {
+    "level": "info",
+    "disableCaller": true,
+    "encoding": "console",
+    "outputPaths": [
+      "stdout"
+    ]
+  },
+  "warpsync": {
+    "advancementRange": 150
+  },
+  "spammer": {
+    "message": "IOTA - A new dawn",
+    "index": "HORNET Spammer",
+    "indexSemiLazy": "HORNET Spammer Semi-Lazy",
+    "cpuMaxUsage": 0.8,
+    "mpsRateLimit": 0.5,
+    "workers": 0,
+    "autostart": true
+  },
+  "faucet": {
+    "amount": 10000000,
+    "smallAmount": 1000000,
+    "maxAddressBalance": 20000000,
+    "maxOutputCount": 127,
+    "indexationMessage": "HORNET FAUCET",
+    "batchTimeout": "2s",
+    "powWorkerCount": 0,
+    "website": {
+      "bindAddress": "localhost:8091",
+      "enabled": false
+    }
+  },
+  "mqtt": {
+    "bindAddress": "localhost:1883",
+    "wsPort": 1888,
+    "workerCount": 100
+  },
+  "profiling": {
+    "bindAddress": "localhost:6060"
+  },
+  "prometheus": {
+    "bindAddress": "localhost:9311",
+    "fileServiceDiscovery": {
+      "enabled": false,
+      "path": "target.json",
+      "target": "localhost:9311"
+    },
+    "databaseMetrics": true,
+    "nodeMetrics": true,
+    "gossipMetrics": true,
+    "cachesMetrics": true,
+    "restAPIMetrics": true,
+    "migrationMetrics": true,
+    "coordinatorMetrics": true,
+    "mqttBrokerMetrics": true,
+    "debugMetrics": false,
+    "goMetrics": false,
+    "processMetrics": false,
+    "promhttpMetrics": false
+  },
+  "debug": {
+    "whiteFlagParentsSolidTimeout": "2s"
+  }
+}

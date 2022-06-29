@@ -1,0 +1,4 @@
+
+Flags to make compile work
+
+--require=ts-node/register   --loader=ts-node/esm    --experimental-specifier-resolution=node

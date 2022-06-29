@@ -2,6 +2,16 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "lerna": "^4.0.0"
-  }
+    "lerna": "^5.4.1"
+  },
+  "workspaces": [
+    "projects/*",
+    "projects/boat-systems/**/*",
+    "projects/libertynet/*",
+    "projects/libertynet/core/*",
+    "projects/libertynet/plugins/*",
+    "projects/libertynet/examples/*",
+    "projects/libertynet/core/new-p2p/*",
+    "projects/libertynet/core/new-rpc/*"
+  ]
 }

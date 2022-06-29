@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="All tests" type="CompoundRunConfigurationType">
+    <toRun name="monads-tests" type="mocha-javascript-test-runner" />
+    <toRun name="rsjs-msg-bus-tests" type="mocha-javascript-test-runner" />
+    <toRun name="rxjs-utils-tests" type="mocha-javascript-test-runner" />
+    <toRun name="trie-tests" type="mocha-javascript-test-runner" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+message Account {
+  string address = 1;
+  string pubKey = 2;
+  int32 nextSeq = 3;
+}
+

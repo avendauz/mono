@@ -1,0 +1,32 @@
+{
+  "name": "boat-rudder-bridge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@scottburch/rxjs-msg-bus": "^1.0.6",
+    "@serialport/parser-delimiter": "^10.3.0",
+    "@types/chai": "^4.3.1",
+    "@types/i2c-bus": "^5.1.0",
+    "@types/lodash": "^4.14.178",
+    "@types/mocha": "^9.1.0",
+    "@types/node": "^17.0.4",
+    "@types/serialport": "^8.0.2",
+    "boat-autopilot": "^1.0.0",
+    "boat-talk": "^1.0.0",
+    "chai": "^4.3.6",
+    "delay": "^5.0.0",
+    "i2c-bus": "^5.2.2",
+    "lodash": "^4.17.21",
+    "mocha": "^10.0.0",
+    "monet": "^0.9.3",
+    "promise-passthrough": "^1.0.5",
+    "rxjs": "^7.4.0",
+    "serialport": "^10.4.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.5.4"
+  },
+  "scripts": {
+    "start": "ts-node src/rudder-bridge.ts"
+  }
+}

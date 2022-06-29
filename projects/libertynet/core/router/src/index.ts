@@ -1,0 +1,1 @@
+export {RegisterNewRouteHandler} from './router'

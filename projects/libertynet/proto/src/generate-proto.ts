@@ -13,7 +13,7 @@ setTimeout(() => generateProto(filename));
 
 
 export function generateProto(filename: string) {
-    return exec`yarn protoc --plugin=${__dirname}/../node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=${filepath}/src ${filepath}/${filename} ${getOptions()}`
+    return exec`yarn protoc --plugin=${__dirname}/../node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=${filepath}/src --ts_proto_opt=esModuleInterop=true ${filepath}/${filename} ${getOptions()}`
 }
 
 const getOptions = () => [

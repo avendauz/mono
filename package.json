@@ -12,6 +12,7 @@
     "projects/libertynet/plugins/*",
     "projects/libertynet/examples/*",
     "projects/libertynet/core/new-p2p/*",
-    "projects/libertynet/core/new-rpc/*"
+    "projects/libertynet/core/new-rpc/*",
+    "projects/libertynet/core/new-dag/*"
   ]
 }

@@ -7,11 +7,11 @@ import {
     DagValidMessageReceived,
     newDagMessage,
     numToInt32
-} from "./dag";
+} from "../lib";
 import {DagMessage} from "./dagMessage";
 import {first, map, take, tap, toArray} from 'rxjs'
 import {expect} from 'chai'
-import './dagLogging'
+import '../lib/dagLogger'
 /**
  dag message received from peer
  write message to buffer

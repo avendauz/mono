@@ -2,6 +2,7 @@ import {eventListener, Msg, sendEvent} from "@scottburch/rxjs-msg-bus";
 import {DagMessage} from "./dagMessage";
 import {tap, filter, concatMap, from, switchMap, of, map} from 'rxjs'
 import {createHash} from "crypto";
+import {addProp} from "@scottburch/rxjs-utils";
 
 
 type DagMessageMetaWrapperLocal = {
@@ -44,7 +45,7 @@ eventListener<DagMessageReceived>('dag.message-received').pipe(
 ).subscribe()
 
 export const newDagMessage = (msg: Omit<DagMessage, 'id'>) => of(msg).pipe(
-    switchMap(msg => calculateMsgHash({...msg, id: new Uint8Array()}).pipe(map(id => ({...msg, id}))))
+    switchMap(msg => calculateMsgHash(msg).pipe(addProp(msg, 'id')))
 )
 
 export const validateMsg = (msg: DagMessage) => of(msg).pipe(
@@ -54,7 +55,7 @@ export const validateMsg = (msg: DagMessage) => of(msg).pipe(
 );
 
 
-export const calculateMsgHash = (msg: DagMessage) => of(msg).pipe(
+export const calculateMsgHash = (msg: DagMessage | Omit<DagMessage, 'id'>) => of(msg).pipe(
     map(() => new Uint8Array([
         ...msg.payload,
         ...concatParentIds(msg.parentIds),

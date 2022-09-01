@@ -13,6 +13,8 @@
     "projects/libertynet/examples/*",
     "projects/libertynet/core/new-p2p/*",
     "projects/libertynet/core/new-rpc/*",
-    "projects/libertynet/core/new-dag/*"
+    "projects/libertynet/core/new-dag/*",
+    "ci",
+    "projects/sandbox/temp"
   ]
 }

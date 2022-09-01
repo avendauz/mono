@@ -67,8 +67,7 @@ eventListener<P2pStopMsg>('p2p.stop').pipe(
 ).subscribe()
 
 eventListener<P2pStartMsg>('p2p.start').pipe(
-    tap(x => x),
-    switchMap(p2p => (p2p.libp2p.start() || Promise.resolve(p2p)).then(() => p2p)),
+    concatMap(p2p => (p2p.libp2p.start() || Promise.resolve(p2p)).then(() => p2p)),
     tap(sendEventPartial<P2pStartedMsg>('p2p.started'))
 ).subscribe();
 

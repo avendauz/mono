@@ -1,10 +1,15 @@
 {
   "name": "@libertynet/dag",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "type": "module",
   "license": "MIT",
+  "exports": {
+    ".": "./lib/index.js",
+    "./daglogger": "./lib/dagLogger.js"
+  },
   "dependencies": {
+    "@scottburch/rxjs-utils": "*",
     "@types/chai": "^4.3.3",
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.7.14",
@@ -15,6 +20,7 @@
   },
   "scripts": {
     "test": "mocha --require ts-node/register   --loader=ts-node/esm    --experimental-specifier-resolution=node src/**/*.spec.ts",
-    "gen-proto": "ts-node ../../proto/src/generate-proto.ts src/dagMessage.proto"
+    "gen-proto": "ts-node ../../proto/src/generate-proto.ts src/dagMessage.proto",
+    "build": "rm -rf ./lib & tsc"
   }
 }

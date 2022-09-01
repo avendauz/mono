@@ -6,9 +6,9 @@ import {
     RpcServerStartMsg,
     RpcServerStopMsg,
     RpcServerStoppedMsg
-} from "./rpc";
+} from "../lib";
 import {concatMap, tap} from "rxjs";
-import {newRpcClient} from "./rpcClient";
+import {newRpcClient} from "../lib/rpcClient";
 import {expect} from 'chai';
 
 describe('rpc server', () => {

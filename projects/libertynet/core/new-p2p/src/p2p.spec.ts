@@ -11,12 +11,12 @@ import {
     P2pStartMsg,
     P2pStopMsg,
     P2pStoppedMsg
-} from "./p2p";
+} from "../lib";
 import {eventListener, getCentralMsgBus, sendEvent, sendEventPartial} from "@scottburch/rxjs-msg-bus";
 import {concatMap, first, from, switchMap, take, tap, timer, toArray, range, delay} from "rxjs";
 import {TextDecoder} from "util";
 import {expect} from 'chai'
-import './p2pLogger'
+import '@libertynet/p2p/p2plogger'
 import {describe, it} from 'mocha'
 
 
@@ -49,6 +49,7 @@ describe('p2p', function() {
                     switchMap(() => from(p2ps)),
                     tap(sendEventPartial<P2pStopMsg>('p2p.stop')),
                     concatMap(() => eventListener<P2pStoppedMsg>('p2p.stopped')),
+                    first(),
                     tap(() => done())
                 ).subscribe()
             })),

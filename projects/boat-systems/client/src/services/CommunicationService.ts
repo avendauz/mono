@@ -2,7 +2,7 @@ import {webSocket} from "rxjs/webSocket";
 import {map, tap} from "rxjs";
 import {bind} from "@react-rxjs/core";
 import {
-    AutopilotStatusMsg,
+    AutopilotStatusMsg, CalibrateCompassMsg, CompassCalibrationStateMsg,
     CompassDeltaMsg,
     CompassMsg,
     EngineOilPressMsg,
@@ -29,6 +29,8 @@ export const [useRudderPosition] = bind(eventListener<RudderPositionMsg>('rudder
         map(msg => 1024 - msg.value)
     ), 0
 );
+
+export const [useCompassCalibration] = bind(eventListener<CompassCalibrationStateMsg>('compass-calibration-state'));
 
 
 export const [useCompassDelta] = bind(eventListener<CompassDeltaMsg>('compass-delta'), {compassDelta: 0});

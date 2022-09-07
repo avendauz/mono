@@ -17,7 +17,8 @@ export type CompassCalibrationStateMsg = Msg<'compass-calibration-state', {
     mag: number,
     accel: number,
     gyro: number,
-    cmps: number
+    cmps: number,
+    raw: string
 }>
 
 export type SetCourseMsg = Msg<'set-course', number>

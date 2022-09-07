@@ -1,0 +1,29 @@
+{
+  "name": "@scottburch/with-context",
+  "version": "1.0.7",
+  "main": "lib/with-context.js",
+  "types": "lib/with-context.d.ts",
+  "repository": {
+    "url": "https://github.com/scottburch/mono"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "monet": "^0.9.3"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.22",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^18.7.15",
+    "chai": "^4.3.4",
+    "mocha": "^10.0.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.2"
+  },
+  "scripts": {
+      "build": "rm -rf lib & tsc",
+    "test": "mocha -r ts-node/register src/**/*.spec.ts"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

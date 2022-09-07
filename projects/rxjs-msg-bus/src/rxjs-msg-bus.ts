@@ -20,6 +20,13 @@ export const eventListenerOnce = <T extends Msg<T['type'], T['data']>>(type: T['
     map(msg => msg.data as T['data'])
 );
 
+export const eventListenerMatchOnce = <T extends Msg<T['type'], T['data']>>(type: T['type'], predicate: (data: T['data']) => boolean) => (centralBus$ as Observable<T>).pipe(
+    filter(msg => msg.type === type),
+    filter(msg => predicate(msg.data)),
+    first(),
+    map(msg => msg.data as T['data'])
+);
+
 
 export const sendEventSync = <T extends Msg<T['type'], T['data']>>(type: T['type'], data?: T['data'] ) =>
     centralBus.next({type, data});

@@ -1,0 +1,27 @@
+{
+  "name": "@libertynet/node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "@scottburch/exec": "^1.0.0",
+    "@scottburch/rxjs-msg-bus": "^1.0.2",
+    "@scottburch/rxjs-utils": "^1.0.2",
+    "@types/fs-extra": "^9.0.13",
+    "@types/node": "^18.7.3",
+    "delay": "^5.0.0",
+    "fs-extra": "^10.1.0",
+    "protobufjs": "^7.0.0",
+    "zx": "^7.0.7"
+  },
+  "scripts": {
+    "create-snapshot": "node_modules/.bin/ts-node create-snapshot.ts",
+    "run-coo-bootstrap": "node_modules/.bin/ts-node run-coo-bootstrap.ts",
+    "run-node1": "node_modules/.bin/ts-node run-node1.ts"
+  }
+}

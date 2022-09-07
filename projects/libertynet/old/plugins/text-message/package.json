@@ -1,0 +1,14 @@
+{
+  "name": "@libertynet/text-message-plugin",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^18.0.6",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "gen-proto": "node_modules/.bin/ts-node ../../proto/src/generate-proto.ts src/textMessage.proto"
+  }
+}

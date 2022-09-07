@@ -1,5 +1,5 @@
 import {
-    eventListener,
+    eventListener, eventListenerMatchOnce,
     eventListenerOnce,
     Msg,
     sendEvent,
@@ -45,6 +45,21 @@ describe('rxjs-msg-bus', () => {
             ).subscribe();
             sendEvent<TestEvent>('test-event2', 100)
         });
+
+        it('should have a function with a matcher', (done) => {
+            type Event = Msg<'test-event3', number>;
+            let nums: number[] = [];
+
+            eventListener<Event>('test-event3').subscribe(num => nums.push(num));
+
+            eventListenerMatchOnce<Event>('test-event3', (num) => num === 3).pipe(
+                tap(() => expect(nums).to.deep.equal([1,2,3])),
+                tap(() => done())
+            ).subscribe();
+
+
+            [1,2,3].forEach(sendEventPartial<Event>('test-event3'));
+        })
     });
 
     describe('sync events', () => {

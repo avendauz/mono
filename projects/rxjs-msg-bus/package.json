@@ -1,12 +1,9 @@
 {
   "name": "@scottburch/rxjs-msg-bus",
-  "version": "1.0.7",
+  "version": "1.1.1",
   "main": "lib/rxjs-msg-bus.js",
   "license": "MIT",
   "dependencies": {
-    "@scottburch/rxjs-utils": "^1.0.2",
-    "delay": "^5.0.0",
-    "protobufjs": "^7.0.0",
     "rxjs": "^7.5.5"
   },
   "devDependencies": {

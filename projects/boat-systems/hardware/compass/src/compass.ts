@@ -3,7 +3,8 @@ import {PromisifiedBus} from "i2c-bus";
 //const {sendError, sendInfo} = require('../../network/logSender');
 import {curry, memoize} from "lodash";
 import {
-    combineLatest,
+    bufferTime,
+    combineLatest, concatMap, debounceTime, delay,
     from,
     interval,
     map,
@@ -12,7 +13,7 @@ import {
     Subject,
     Subscription,
     switchMap,
-    tap,
+    tap, throttleTime,
     timer,
     withLatestFrom
 } from "rxjs";
@@ -26,7 +27,7 @@ const GYRO_CAL_ENABLE = 0x04;
 const ACCEL_CAL_ENABLE = 0x02;
 const MAG_CAL_ENABLE = 0x01;
 
-const START_CALIBRATION = new Uint8Array([0x98, 0x95, 0x99, 0x80 | ACCEL_CAL_ENABLE | MAG_CAL_ENABLE]);
+const START_CALIBRATION = [0x98, 0x95, 0x99, 0x80 | ACCEL_CAL_ENABLE | MAG_CAL_ENABLE | PERIODIC_AUTOSAVE];
 const STOP_CALIBRATION = [0x98, 0x95, 0x99, 0x80];
 const STORE_PROFILE = [0xF0, 0xF5, 0xF6];
 const ERASE_STORED_PROFILE = [0xe0, 0xe5, 0xe2];
@@ -50,8 +51,9 @@ export const startCompass = (pollRate: number = 100) => {
 
     interval(pollRate).pipe(
         switchMap(() => readCompass()),
+        bufferTime(2000),
         switchMap(() => readCalibration())
-    )
+    ).subscribe()
 }
 
 
@@ -82,18 +84,23 @@ const readCalibration = () =>
     readByte(CALIBRATION_STATE).pipe(
         map(state => ({
             mag: state & 0x03,
-            accel: state & 0x0c,
-            gyro: state & 0x30,
-            cmps: state & 0xc0
+            accel: (state & 0x0c) >> 2,
+            gyro: (state & 0x30) >> 4,
+            cmps: (state & 0xc0) >> 6,
+            raw: state.toString(16)
         })),
         tap(sendEventPartial<CompassCalibrationStateMsg>('compass-calibration-state'))
     )
 
-const writeCommand = (bytes: Uint8Array): Subscription=>
+const writeCommand = (bytes: number[]) => {
+    console.log("writing to compass", bytes);
     from(bytes).pipe(
-        switchMap(bytes => getI2cBus().then(i2c => ({i2c, bytes}))),
-        map(({bytes, i2c}) => i2c.writeByte(CMPS14_ADDR, 0, bytes))
-    ).subscribe()
+        concatMap(n => of(n).pipe(
+            concatMap(byte => getI2cBus().then(i2c => i2c.writeByte(CMPS14_ADDR, 0, byte)).catch(e => console.log(e))),
+            delay(20)
+        ))
+    ).subscribe(() => console.log('wrote command to compass', bytes));
+}
 
 
 const readWord = (i2c: PromisifiedBus, register: Byte) =>

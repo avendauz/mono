@@ -7,14 +7,10 @@
   "workspaces": [
     "projects/*",
     "projects/boat-systems/**/*",
-    "projects/libertynet/*",
-    "projects/libertynet/core/*",
-    "projects/libertynet/plugins/*",
-    "projects/libertynet/examples/*",
-    "projects/libertynet/core/new-p2p/*",
-    "projects/libertynet/core/new-rpc/*",
-    "projects/libertynet/core/new-dag/*",
-    "ci",
-    "projects/sandbox/temp"
+    "projects/libertynet/proto",
+    "projects/libertynet/core",
+    "projects/libertynet/sdk",
+    "projects/libertynet/cli",
+    "projects/libertynet/test"
   ]
 }

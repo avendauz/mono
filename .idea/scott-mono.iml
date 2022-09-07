@@ -5,6 +5,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/projects/libertynet/old" />
       <excludeFolder url="file://$MODULE_DIR$/projects/rxjs-msg-bus-udp-bridge/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/libertynet/core/lib" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

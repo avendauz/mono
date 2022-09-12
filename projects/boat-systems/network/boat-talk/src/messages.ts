@@ -13,6 +13,12 @@ export type CompassMsg = Msg<'compass', {
 }>
 
 export type CalibrateCompassMsg = Msg<'calibrate-compass'>
+export type CompassCalibrationStateMsg = Msg<'compass-calibration-state', {
+    mag: number,
+    accel: number,
+    gyro: number,
+    cmps: number
+}>
 
 export type SetCourseMsg = Msg<'set-course', number>
 

@@ -65,7 +65,7 @@ export const exec = (...args: (Omit<TemplateStringsArray, 'raw'> | string | numb
                 resolve(trim(new TextDecoder().decode(data)))
             });
             child.on('error', () => {
-                const data = Buffer.concat(stdout);
+                const data = Buffer.concat(stderr);
                 reject(trim(new TextDecoder().decode(data)));
             })
         }));

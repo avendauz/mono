@@ -1,6 +1,6 @@
 import {filter, flatten, join, map, trim} from "lodash/fp";
 import {isArray} from "lodash";
-import {ChildProcess, exec as childExec} from 'child_process'
+import {ChildProcess, spawn} from 'child_process'
 
 let cwd = process.cwd();
 
@@ -52,21 +52,23 @@ export const exec = (...args: (Omit<TemplateStringsArray, 'raw'> | string | numb
             console.log(`$${cmd}`);
             return cmd;
         })
-        .then(cmd => (p.setChild(childExec(cmd, {cwd}))))
+        .then(cmd => (p.setChild(spawn(cmd, {cwd, shell: true}))))
         .then(child => new Promise((resolve, reject) => {
-            let stdout = '';
-            let stderr = '';
+            let stdout: Buffer[] = [];
+            let stderr: Buffer[] = [];
             const stdoutStr = child.stdout?.pipe(process.stdout);
             const stderrStr = child.stderr?.pipe(process.stderr);
-            child.stdout?.on('data', d => stdout += d);
-            child.stderr?.on('data', d => stderr += d);
-            child.on('exit', () => {
-                resolve(trim(stdout))
+            child.stdout?.on('data', d => stdout.push(d));
+            child.stderr?.on('data', d => stderr.push(d));
+            child.on('close', () => {
+                const data = Buffer.concat(stdout);
+                resolve(trim(new TextDecoder().decode(data)))
+            });
+            child.on('error', () => {
+                const data = Buffer.concat(stdout);
+                reject(trim(new TextDecoder().decode(data)));
             })
-            child.on('error', () => reject(trim(stderr)))
         }));
     return p
 }
-
-
 

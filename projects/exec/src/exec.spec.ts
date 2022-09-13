@@ -1,5 +1,6 @@
 import {cd, exec} from "./exec";
 import {expect} from "chai";
+import {describe} from 'mocha'
 
 describe('exec', () => {
     it('should list a file in the current directory', () =>
@@ -43,7 +44,19 @@ describe('exec', () => {
            p2.kill();
            p3.kill();
        }, 500)
-    })
+    });
+
+    it('should return the complete output of a script', function () {
+            this.timeout(60_000);
+            const epsilon = 1;
+            const size = 1024 * 1024 + epsilon;
+            return exec`yarn ts-node ./src/largeOutputScript.ts ${size}`
+                .then(output => output.split('\n'))
+                .then(output => output.filter(line => line.includes('00000000')))
+                .then(output => Buffer.from(output[0]).length)
+                .then(outputSize => expect(outputSize).to.equal(size)).toPromise()
+        }
+    );
 
     describe('cd', () => {
         it('should set the cwd for the following commands', () => {
